@@ -12,14 +12,14 @@ const useStyles = makeStyles({
 	}
 });
 
-const Header = ({ className, ...rest }) => {
+const Header = (props, { className, ...rest }) => {
 	const classes = useStyles();
 	const [ open, setOpen ] = React.useState(false);
+	const { categories } = props;
 
 	const handleDrawerOpen = () => {
 		setOpen(true);
 	};
-
 	return (
 		<div className={classes.root}>
 			<AppBar className={clsx(classes.root, className)} elevation={0} {...rest}>
@@ -38,7 +38,7 @@ const Header = ({ className, ...rest }) => {
 					</Typography>
 				</Toolbar>
 			</AppBar>
-			<Drawer open={open} setOpen={setOpen} />
+			<Drawer categories={categories} open={open} setOpen={setOpen} />
 		</div>
 	);
 };

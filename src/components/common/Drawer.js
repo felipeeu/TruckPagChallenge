@@ -32,10 +32,9 @@ const useStyles = makeStyles((theme) => ({
 	}
 }));
 
-const MenuDrawer = ({ open, setOpen }) => {
+const MenuDrawer = ({ categories, open, setOpen }) => {
 	const classes = useStyles();
 	const theme = useTheme();
-
 	const handleDrawerClose = () => {
 		setOpen(false);
 	};
@@ -57,14 +56,15 @@ const MenuDrawer = ({ open, setOpen }) => {
 			</div>
 			<Divider />
 			<List>
-				{[ 'Chuck', 'Norris', 'Jokes' ].map((text, index) => (
-					<ListItem button key={text}>
-						<ListItemIcon>
-							<LightBulbIcon />
-						</ListItemIcon>
-						<ListItemText primary={text} />
-					</ListItem>
-				))}
+				{categories &&
+					categories.map((text, index) => (
+						<ListItem button key={text}>
+							<ListItemIcon>
+								<LightBulbIcon />
+							</ListItemIcon>
+							<ListItemText primary={text} />
+						</ListItem>
+					))}
 			</List>
 		</Drawer>
 	);
