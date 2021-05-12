@@ -24,11 +24,7 @@ export default function App() {
 		<Container maxWidth="sm">
 			<Header />
 			<Box my={4}>
-				<Typography variant="h4" component="h1" gutterBottom>
-					Chuck Norris Jokes
-				</Typography>
-				<ProTip />
-				<Copyright />
+			
 			</Box>
 		</Container>
 	);
