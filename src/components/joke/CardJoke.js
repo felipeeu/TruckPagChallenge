@@ -22,10 +22,9 @@ const useStyles = makeStyles({
 		marginBottom: 12
 	}
 });
-const CardJoke = () => {
+const CardJoke = ({ data }) => {
 	const classes = useStyles();
-	const bull = <span className={classes.bullet}>•</span>;
-
+	
 	return (
 		<Card className={classes.root} variant="outlined">
 			<CardContent>
@@ -33,15 +32,13 @@ const CardJoke = () => {
 					Joke number
 				</Typography>
 				<Typography variant="h5" component="h2">
-					2
+					{data.id}
 				</Typography>
 				<Typography className={classes.pos} color="textSecondary">
-					explicit
+					{data.categories[0] || 'no category'}
 				</Typography>
 				<Typography variant="body2" component="p">
-					well meaning and kindly.
-					<br />
-					{'"a benevolent smile"'}
+					{data.joke}
 				</Typography>
 			</CardContent>
 			<CardActions>
