@@ -1,4 +1,4 @@
-import { filterJokesByCategories } from './functions';
+import { filterJokesByCategories, jokesWithoutCategory } from './functions';
 const jokes = [
 	{
 		categories: [ 'explicit' ],
@@ -46,7 +46,7 @@ describe('filter list of jokes by its categories', () => {
 		expect(filterJokesByCategories(jokes, 'nojokes')).toEqual(expect.arrayContaining([]));
 	});
 	it('match no jokes if list is empty', () => {
-		expect(filterJokesByCategories([ ], 'explicit')).toEqual(expect.arrayContaining([]));
+		expect(filterJokesByCategories([], 'explicit')).toEqual(expect.arrayContaining([]));
 	});
 	it('match no jokes if list is null', () => {
 		expect(filterJokesByCategories(null, 'explicit')).toEqual(expect.arrayContaining([]));
@@ -56,5 +56,50 @@ describe('filter list of jokes by its categories', () => {
 	});
 	it('match no jokes if name of category is null', () => {
 		expect(filterJokesByCategories(jokes, null)).toEqual(expect.arrayContaining([]));
+	});
+});
+
+describe('return only jokes without category', () => {
+	it('no match jokes without category', () => {
+		expect(jokesWithoutCategory(jokes)).toEqual(
+			expect.not.arrayContaining([
+				{
+					categories: [ 'explicit' ],
+					id: 1,
+					joke: 'Chuck Norris uses ribbed condoms inside out, so he gets the pleasure.'
+				},
+
+				{
+					categories: [],
+					id: 2,
+					joke:
+						'MacGyver can build an airplane out of gum and paper clips. Chuck Norris can kill him and take it.'
+				},
+
+				{
+					categories: [ 'nerdy' ],
+					id: 3,
+					joke: 'Chuck Norris can download emails with his pick-up.'
+				}
+			])
+		);
+	});
+	it('match jokes without category', () => {
+		expect(jokesWithoutCategory(jokes)).toEqual(
+			expect.arrayContaining([
+				{
+					categories: [],
+					id: 2,
+					joke:
+						'MacGyver can build an airplane out of gum and paper clips. Chuck Norris can kill him and take it.'
+				}
+			])
+		);
+	});
+	it('no match jokes if jokes is null', () => {
+		expect(jokesWithoutCategory(null)).toEqual(expect.arrayContaining([]));
+	});
+	it('no match jokes if jokes is empty', () => {
+		expect(jokesWithoutCategory([])).toEqual(expect.arrayContaining([]));
 	});
 });

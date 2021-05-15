@@ -6,8 +6,9 @@ import Link from '@material-ui/core/Link';
 import ProTip from './ProTip';
 import Header from './components/common/Header';
 import CardJoke from './components/joke/CardJoke';
+import Home from './Home';
 import { getJokesCategories, getJokes } from './api';
-import { filterJokesByCategories } from './functions';
+import { filterJokesByCategories, jokesWithoutCategory } from './functions';
 
 function Copyright() {
 	return (
@@ -28,8 +29,6 @@ export default function App() {
 	const [ category, setCategory ] = useState('');
 	const [ filteredJokes, setFilteredJokes ] = useState([]);
 
-	console.log('jokes ', filteredJokes, 'cat', category);
-
 	useEffect(() => {
 		getJokesCategories().then((response) => response && setCategories(response.data.value));
 	}, []);
@@ -49,7 +48,7 @@ export default function App() {
 		<Container maxWidth="sm">
 			<Header categories={categories} setCategory={setCategory} />
 			<Box my={10}>
-				<CardJoke />
+				<Home jokes={jokes} />
 			</Box>
 		</Container>
 	);
