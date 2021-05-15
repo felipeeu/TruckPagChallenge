@@ -32,7 +32,7 @@ const useStyles = makeStyles((theme) => ({
 	}
 }));
 
-const MenuDrawer = ({ categories, open, setOpen }) => {
+const MenuDrawer = ({ categories, open, setOpen, setCategory }) => {
 	const classes = useStyles();
 	const theme = useTheme();
 	const handleDrawerClose = () => {
@@ -58,11 +58,11 @@ const MenuDrawer = ({ categories, open, setOpen }) => {
 			<List>
 				{categories &&
 					categories.map((text, index) => (
-						<ListItem button key={text}>
+						<ListItem button key={index}>
 							<ListItemIcon>
 								<LightBulbIcon />
 							</ListItemIcon>
-							<ListItemText primary={text} />
+							<ListItemText primary={text} onClick={() => setCategory(text)} />
 						</ListItem>
 					))}
 			</List>
