@@ -5,7 +5,9 @@ import Box from '@material-ui/core/Box';
 import Link from '@material-ui/core/Link';
 import ProTip from './ProTip';
 import Header from './components/common/Header';
-import { getJokesCategories } from './api';
+import CardJoke from './components/joke/CardJoke';
+import { getJokesCategories, getJokes } from './api';
+import { filterJokesByCategories } from './functions';
 
 function Copyright() {
 	return (
@@ -22,16 +24,33 @@ function Copyright() {
 
 export default function App() {
 	const [ categories, setCategories ] = useState([]);
+	const [ jokes, setJokes ] = useState([]);
+	const [ category, setCategory ] = useState('');
+	const [ filteredJokes, setFilteredJokes ] = useState([]);
+
+	console.log('jokes ', filteredJokes, 'cat', category);
 
 	useEffect(() => {
 		getJokesCategories().then((response) => response && setCategories(response.data.value));
 	}, []);
-	console.log('CATEGO', categories);
+
+	useEffect(() => {
+		getJokes().then((response) => response && setJokes(response.data.value));
+	}, []);
+
+	useEffect(
+		() => {
+			setFilteredJokes(filterJokesByCategories(jokes, category));
+		},
+		[ category ]
+	);
 
 	return (
 		<Container maxWidth="sm">
-			<Header categories={categories}/>
-			<Box my={10} />
+			<Header categories={categories} setCategory={setCategory} />
+			<Box my={10}>
+				<CardJoke />
+			</Box>
 		</Container>
 	);
 }
