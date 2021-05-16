@@ -63,7 +63,7 @@ const MenuDrawer = ({ categories, open, setOpen, setCategory }) => {
 							<ListItemIcon>
 								<LightBulbIcon />
 							</ListItemIcon>
-							<Link to={`/${text}`}>
+							<Link to={`/${text}`} onClick={() => setCategory(text)}>
 								<ListItemText primary={text} />
 							</Link>
 						</ListItem>

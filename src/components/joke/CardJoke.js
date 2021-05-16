@@ -24,7 +24,7 @@ const useStyles = makeStyles({
 });
 const CardJoke = ({ data }) => {
 	const classes = useStyles();
-	
+
 	return (
 		<Card className={classes.root} variant="outlined">
 			<CardContent>
@@ -41,9 +41,6 @@ const CardJoke = ({ data }) => {
 					{data.joke}
 				</Typography>
 			</CardContent>
-			<CardActions>
-				<Button size="small">Learn More</Button>
-			</CardActions>
 		</Card>
 	);
 };
