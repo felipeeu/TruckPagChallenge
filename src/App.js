@@ -9,6 +9,9 @@ import CardJoke from './components/joke/CardJoke';
 import Home from './Home';
 import { getJokesCategories, getJokes } from './api';
 import { filterJokesByCategories, jokesWithoutCategory } from './functions';
+import { Route, Switch, withRouter } from 'react-router-dom';
+import PrivateRoute from './PrivateRoute';
+import Explicit from './components/pages/Explicit';
 
 function Copyright() {
 	return (
@@ -23,11 +26,12 @@ function Copyright() {
 	);
 }
 
-export default function App() {
+export default withRouter(function App(props) {
 	const [ categories, setCategories ] = useState([]);
 	const [ jokes, setJokes ] = useState([]);
 	const [ category, setCategory ] = useState('');
 	const [ filteredJokes, setFilteredJokes ] = useState([]);
+	console.log(props);
 
 	useEffect(() => {
 		getJokesCategories().then((response) => response && setCategories(response.data.value));
@@ -48,8 +52,19 @@ export default function App() {
 		<Container maxWidth="sm">
 			<Header categories={categories} setCategory={setCategory} />
 			<Box my={10}>
-				<Home jokes={jokes} />
+				<Switch>
+					<Route path="/nerdy">
+						{/* <Home jokes={jokes} /> */}
+						<div>Nerdy Jokes</div>
+					</Route>
+					<Route path="/">
+						<div>Home</div>
+					</Route>
+					<PrivateRoute path="/explicit">
+						<Explicit jokes={filteredJokes} />
+					</PrivateRoute>
+				</Switch>
 			</Box>
 		</Container>
 	);
-}
+});
