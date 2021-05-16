@@ -2,11 +2,12 @@ import React, { Fragment } from 'react';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import Layout from './Layout';
 
-const PageJoke = ({ jokes, category }) => {
+const PageJoke = ({ jokes, title }) => {
 	return (
 		<Fragment>
 			<CssBaseline />
-			<Layout jokes={jokes} category={category} />
+			<h1>{title}</h1>
+			<Layout jokes={jokes} />
 		</Fragment>
 	);
 };

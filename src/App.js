@@ -5,11 +5,12 @@ import Box from '@material-ui/core/Box';
 import Link from '@material-ui/core/Link';
 import ProTip from './ProTip';
 import Header from './components/common/Header';
-import Home from './Home';
+
 import { getJokesCategories, getJokes } from './api';
 import { Route, Switch, withRouter } from 'react-router-dom';
 import PrivateRoute from './PrivateRoute';
 import PageJoke from './components/pages/PageJoke';
+import { filterJokesByCategories, noExplicitJokes, jokesWithoutCategory } from './functions';
 
 function Copyright() {
 	return (
@@ -43,16 +44,16 @@ export default withRouter(function App(props) {
 			<Box my={10}>
 				<Switch>
 					<Route path="/nerdy">
-						<PageJoke jokes={jokes} category={category || 'nerdy'} />
-					</Route>
-					<Route path="/noexplicit">
-						<PageJoke jokes={jokes} category={category || 'noexplicit'} />
+						<PageJoke jokes={filterJokesByCategories(jokes, category)} title={'Nerdy Jokes'} />
 					</Route>
 					<PrivateRoute path="/explicit">
-						<PageJoke jokes={jokes} category={category || 'explicit'} />
+						<PageJoke jokes={filterJokesByCategories(jokes, category)} title={'Explicit Jokes'} />
 					</PrivateRoute>
+					<Route path="/others">
+						<PageJoke jokes={jokesWithoutCategory(jokes)} title={'Others Jokes (without categories)'} />
+					</Route>
 					<Route path="/">
-						<div>TETETETETE</div>
+						<PageJoke jokes={noExplicitJokes(jokes)} title={'All Jokes'} />
 					</Route>
 				</Switch>
 			</Box>

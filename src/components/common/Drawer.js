@@ -68,6 +68,22 @@ const MenuDrawer = ({ categories, open, setOpen, setCategory }) => {
 							</Link>
 						</ListItem>
 					))}
+				<ListItem button>
+					<ListItemIcon>
+						<LightBulbIcon />
+					</ListItemIcon>
+					<Link to={`/others`} onClick={() => setCategory('others')}>
+						<ListItemText primary={'Others'} />
+					</Link>
+				</ListItem>
+				<ListItem button>
+					<ListItemIcon>
+						<LightBulbIcon />
+					</ListItemIcon>
+					<Link to={`/`} onClick={() => setCategory('noexplicit')}>
+						<ListItemText primary={'All Jokes'} />
+					</Link>
+				</ListItem>
 			</List>
 		</Drawer>
 	);
