@@ -12,6 +12,7 @@ import ListItemText from '@material-ui/core/ListItemText';
 import InboxIcon from '@material-ui/icons/MoveToInbox';
 import MailIcon from '@material-ui/icons/Mail';
 import { LightBulbIcon } from '../../ProTip';
+import { Link } from 'react-router-dom';
 
 const drawerWidth = 240;
 
@@ -62,7 +63,9 @@ const MenuDrawer = ({ categories, open, setOpen, setCategory }) => {
 							<ListItemIcon>
 								<LightBulbIcon />
 							</ListItemIcon>
-							<ListItemText primary={text} onClick={() => setCategory(text)} />
+							<Link to={`/${text}`}>
+								<ListItemText primary={text} />
+							</Link>
 						</ListItem>
 					))}
 			</List>

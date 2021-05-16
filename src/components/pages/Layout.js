@@ -1,17 +1,25 @@
-import React, { Fragment } from 'react';
+import React, { Fragment, useState, useEffect } from 'react';
 import CssBaseline from '@material-ui/core/CssBaseline';
-import Typography from '@material-ui/core/Typography';
 import Container from '@material-ui/core/Container';
 import CardJoke from '../joke/CardJoke';
+import { filterJokesByCategories } from '../../functions';
 
-const Layout = ({ jokes }) => {
+const Layout = ({ jokes, category }) => {
+	const [ data, setData ] = useState([]);
+
+	React.useEffect(
+		() => {
+			setData(filterJokesByCategories(jokes, category));
+		},
+		[ jokes ]
+	);
 	return (
 		<Fragment>
 			<CssBaseline />
-			<Container >
-				{jokes &&
-					jokes.map((joke, idx) => {
-						return <CardJoke data={joke} />;
+			<Container>
+				{data &&
+					data.map((joke, idx) => {
+						return <CardJoke key={idx} data={joke} />;
 					})}
 			</Container>
 		</Fragment>

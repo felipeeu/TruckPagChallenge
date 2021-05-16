@@ -1,17 +1,16 @@
 import { Route, Redirect } from 'react-router-dom';
 
 const PrivateRoute = ({ children, ...rest }) => {
-	
 	return (
 		<Route
 			{...rest}
 			render={({ location }) =>
-				false ? (
+				true ? (
 					children
 				) : (
 					<Redirect
 						to={{
-							pathname: '/false',
+							pathname: '/',
 							state: { from: location }
 						}}
 					/>
