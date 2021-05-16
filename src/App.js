@@ -5,7 +5,7 @@ import Box from '@material-ui/core/Box';
 import Link from '@material-ui/core/Link';
 import ProTip from './ProTip';
 import Header from './components/common/Header';
-
+import Modal from './components/common/Modal';
 import { getJokesCategories, getJokes } from './api';
 import { Route, Switch, withRouter } from 'react-router-dom';
 import PrivateRoute from './PrivateRoute';
@@ -29,6 +29,7 @@ export default withRouter(function App(props) {
 	const [ categories, setCategories ] = useState([]);
 	const [ jokes, setJokes ] = useState([]);
 	const [ category, setCategory ] = useState('');
+	
 
 	useEffect(() => {
 		getJokesCategories().then((response) => response && setCategories(response.data.value));
@@ -41,6 +42,7 @@ export default withRouter(function App(props) {
 	return (
 		<Container maxWidth="sm">
 			<Header categories={categories} setCategory={setCategory} />
+			<Modal />
 			<Box my={10}>
 				<Switch>
 					<Route path="/nerdy">
