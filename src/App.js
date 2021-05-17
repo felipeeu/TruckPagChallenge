@@ -25,11 +25,21 @@ function Copyright() {
 	);
 }
 
-export default withRouter(function App(props) {
+export default withRouter(function App() {
 	const [ categories, setCategories ] = useState([]);
 	const [ jokes, setJokes ] = useState([]);
 	const [ category, setCategory ] = useState('');
-	
+	const [ modalOpen, setModalOpen ] = useState(false);
+	const [ inputValue, setInputValue ] = useState('');
+	const [ password, setPassword ] = useState('');
+
+	const handleChange = (event) => {
+		setInputValue(event.target.value);
+	};
+	const handlePassword = () => {
+		setPassword(inputValue);
+		setModalOpen(false);
+	};
 
 	useEffect(() => {
 		getJokesCategories().then((response) => response && setCategories(response.data.value));
@@ -42,13 +52,19 @@ export default withRouter(function App(props) {
 	return (
 		<Container maxWidth="sm">
 			<Header categories={categories} setCategory={setCategory} />
-			<Modal />
+			<Modal
+				setModalOpen={setModalOpen}
+				modalOpen={modalOpen}
+				inputValue={inputValue.password}
+				handleChange={handleChange}
+				handlePassword={handlePassword}
+			/>
 			<Box my={10}>
 				<Switch>
 					<Route path="/nerdy">
 						<PageJoke jokes={filterJokesByCategories(jokes, category)} title={'Nerdy Jokes'} />
 					</Route>
-					<PrivateRoute path="/explicit">
+					<PrivateRoute path="/explicit" setModalOpen={setModalOpen} password={password}>
 						<PageJoke jokes={filterJokesByCategories(jokes, category)} title={'Explicit Jokes'} />
 					</PrivateRoute>
 					<Route path="/others">

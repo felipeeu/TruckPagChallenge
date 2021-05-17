@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import clsx from 'clsx';
 import { makeStyles } from '@material-ui/core/styles';
 import IconButton from '@material-ui/core/IconButton';
@@ -25,16 +25,18 @@ const useStyles = makeStyles((theme) => ({
 	}
 }));
 
-export default function InputAdornments() {
+export default function InputAdornments({ handleChange, inputValue }) {
 	const classes = useStyles();
 	const [ values, setValues ] = React.useState({
 		password: '',
 		showPassword: false
 	});
-	console.log('password', values.password);
-	const handleChange = (prop) => (event) => {
-		setValues({ ...values, [prop]: event.target.value });
-	};
+
+	//
+
+	// const handleChange = (prop) => (event) => {
+	// 	setValues({ ...values, [prop]: event.target.value });
+	// };
 
 	const handleClickShowPassword = () => {
 		setValues({ ...values, showPassword: !values.showPassword });
@@ -52,8 +54,8 @@ export default function InputAdornments() {
 					<Input
 						id="standard-adornment-password"
 						type={values.showPassword ? 'text' : 'password'}
-						value={values.password}
-						onChange={handleChange('password')}
+						value={inputValue}
+						onChange={handleChange}
 						endAdornment={
 							<InputAdornment position="end">
 								<IconButton
@@ -66,7 +68,6 @@ export default function InputAdornments() {
 							</InputAdornment>
 						}
 					/>
-					<p>*password: challengefelipe</p>
 				</FormControl>
 			</div>
 		</div>

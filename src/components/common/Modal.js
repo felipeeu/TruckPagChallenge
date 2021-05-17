@@ -7,21 +7,15 @@ import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import Input from './Input';
 
-const Modal = () => {
-	const [ open, setOpen ] = React.useState(false);
-
-	const handleClickOpen = () => {
-		setOpen(true);
-	};
-
+const Modal = ({ setModalOpen, modalOpen, inputValue, handleChange, handlePassword }) => {
 	const handleClose = () => {
-		setOpen(false);
+		setModalOpen(false);
 	};
 
 	return (
 		<div>
 			<Dialog
-				open={true}
+				open={modalOpen}
 				onClose={handleClose}
 				aria-labelledby="alert-dialog-title"
 				aria-describedby="alert-dialog-description"
@@ -32,10 +26,9 @@ const Modal = () => {
 						Insert the password to see explicit jokes.
 					</DialogContentText>
 				</DialogContent>
-				<Input />
+				<Input inputValue={inputValue} handleChange={handleChange} />
 				<DialogActions>
-					{/* <p>*password: challengefelipe</p> */}
-					<Button onClick={handleClose} color="primary">
+					<Button onClick={handlePassword} color="primary">
 						Ok
 					</Button>
 					<Button onClick={handleClose} color="primary" autoFocus>
