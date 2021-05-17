@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import Container from '@material-ui/core/Container';
 import Typography from '@material-ui/core/Typography';
-import Box from '@material-ui/core/Box';
 import Link from '@material-ui/core/Link';
 import ProTip from './ProTip';
 import Header from './components/common/Header';
@@ -49,10 +48,14 @@ export default withRouter(function App() {
 		getJokes().then((response) => response && setJokes(response.data.value));
 	}, []);
 
-	
 	return (
-		<Container maxWidth="sm">
-			<Header categories={categories} setCategory={setCategory} setModalOpen={setModalOpen} handlePassword={handlePassword}/>
+		<Container >
+			<Header
+				categories={categories}
+				setCategory={setCategory}
+				setModalOpen={setModalOpen}
+				handlePassword={handlePassword}
+			/>
 			<Modal
 				setModalOpen={setModalOpen}
 				modalOpen={modalOpen}
@@ -60,22 +63,21 @@ export default withRouter(function App() {
 				handleChange={handleChange}
 				handlePassword={handlePassword}
 			/>
-			<Box my={10}>
-				<Switch>
-					<Route path="/nerdy">
-						<PageJoke jokes={filterJokesByCategories(jokes, category)} title={'Nerdy Jokes'} />
-					</Route>
-					<PrivateRoute path="/explicit" password={password}>
-						<PageJoke jokes={filterJokesByCategories(jokes, category)} title={'Explicit Jokes'} />
-					</PrivateRoute>
-					<Route path="/others">
-						<PageJoke jokes={jokesWithoutCategory(jokes)} title={'Others Jokes (without categories)'} />
-					</Route>
-					<Route path="/">
-						<PageJoke jokes={noExplicitJokes(jokes)} title={'All Jokes'} />
-					</Route>
-				</Switch>
-			</Box>
+
+			<Switch>
+				<Route path="/nerdy">
+					<PageJoke jokes={filterJokesByCategories(jokes, category)} title={'Nerdy Jokes'} />
+				</Route>
+				<PrivateRoute path="/explicit" password={password}>
+					<PageJoke jokes={filterJokesByCategories(jokes, category)} title={'Explicit Jokes'} />
+				</PrivateRoute>
+				<Route path="/others">
+					<PageJoke jokes={jokesWithoutCategory(jokes)} title={'Others Jokes (without categories)'} />
+				</Route>
+				<Route path="/">
+					<PageJoke jokes={noExplicitJokes(jokes)} title={'All Jokes'} />
+				</Route>
+			</Switch>
 		</Container>
 	);
 });

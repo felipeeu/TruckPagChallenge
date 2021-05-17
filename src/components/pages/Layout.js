@@ -1,18 +1,22 @@
 import React, { Fragment } from 'react';
 import CssBaseline from '@material-ui/core/CssBaseline';
-import Container from '@material-ui/core/Container';
+import Grid from '@material-ui/core/Grid';
 import CardJoke from '../joke/CardJoke';
 
 const Layout = ({ jokes }) => {
 	return (
 		<Fragment>
 			<CssBaseline />
-			<Container>
+			<Grid container spacing={3}>
 				{jokes &&
 					jokes.map((joke, idx) => {
-						return <CardJoke key={idx} data={joke} />;
+						return (
+							<Grid item>
+								<CardJoke key={idx} data={joke} cla />
+							</Grid>
+						);
 					})}
-			</Container>
+			</Grid>
 		</Fragment>
 	);
 };
