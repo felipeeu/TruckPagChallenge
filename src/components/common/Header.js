@@ -15,7 +15,7 @@ const useStyles = makeStyles({
 const Header = (props, { className, ...rest }) => {
 	const classes = useStyles();
 	const [ open, setOpen ] = React.useState(false);
-	const { categories, setCategory } = props;
+	const { categories, setCategory,setModalOpen, handlePassword } = props;
 
 	const handleDrawerOpen = () => {
 		setOpen(true);
@@ -38,7 +38,7 @@ const Header = (props, { className, ...rest }) => {
 					</Typography>
 				</Toolbar>
 			</AppBar>
-			<Drawer categories={categories} setCategory={setCategory} open={open} setOpen={setOpen} />
+			<Drawer categories={categories} setCategory={setCategory} open={open} setOpen={setOpen} setModalOpen={setModalOpen} handlePassword={handlePassword}/>
 		</div>
 	);
 };

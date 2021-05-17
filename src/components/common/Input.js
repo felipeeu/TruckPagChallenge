@@ -25,18 +25,23 @@ const useStyles = makeStyles((theme) => ({
 	}
 }));
 
-export default function InputAdornments({ handleChange, inputValue }) {
+export default function InputAdornments({ handlePassword }) {
 	const classes = useStyles();
 	const [ values, setValues ] = React.useState({
 		password: '',
 		showPassword: false
 	});
-
+	useEffect(
+		() => {
+			handlePassword(values.password);
+		},
+		[ values.password ]
+	);
 	//
 
-	// const handleChange = (prop) => (event) => {
-	// 	setValues({ ...values, [prop]: event.target.value });
-	// };
+	const handleChange = (prop) => (event) => {
+		setValues({ ...values, [prop]: event.target.value });
+	};
 
 	const handleClickShowPassword = () => {
 		setValues({ ...values, showPassword: !values.showPassword });
@@ -54,8 +59,8 @@ export default function InputAdornments({ handleChange, inputValue }) {
 					<Input
 						id="standard-adornment-password"
 						type={values.showPassword ? 'text' : 'password'}
-						value={inputValue}
-						onChange={handleChange}
+						value={values.password}
+						onChange={handleChange('password')}
 						endAdornment={
 							<InputAdornment position="end">
 								<IconButton

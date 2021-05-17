@@ -33,7 +33,7 @@ const useStyles = makeStyles((theme) => ({
 	}
 }));
 
-const MenuDrawer = ({ categories, open, setOpen, setCategory }) => {
+const MenuDrawer = ({ categories, open, setOpen, setCategory, setModalOpen, handlePassword }) => {
 	const classes = useStyles();
 	const theme = useTheme();
 	const handleDrawerClose = () => {
@@ -57,17 +57,40 @@ const MenuDrawer = ({ categories, open, setOpen, setCategory }) => {
 			</div>
 			<Divider />
 			<List>
+				<ListItem button>
+					<ListItemIcon>
+						<LightBulbIcon />
+					</ListItemIcon>
+
+					<ListItemText
+						primary={'explicit'}
+						onClick={() => {
+							handlePassword('');
+							setCategory('explicit');
+							setModalOpen(true);
+						}}
+					/>
+				</ListItem>
+
 				{categories &&
-					categories.map((text, index) => (
-						<ListItem button key={index}>
-							<ListItemIcon>
-								<LightBulbIcon />
-							</ListItemIcon>
-							<Link to={`/${text}`} onClick={() => setCategory(text)}>
-								<ListItemText primary={text} />
-							</Link>
-						</ListItem>
-					))}
+					categories.map(
+						(text, index) =>
+							text !== 'explicit' && (
+								<ListItem button key={index}>
+									<ListItemIcon>
+										<LightBulbIcon />
+									</ListItemIcon>
+									<Link
+										to={`/${text}`}
+										onClick={() => {
+											setCategory(text);
+										}}
+									>
+										<ListItemText primary={text} />
+									</Link>
+								</ListItem>
+							)
+					)}
 				<ListItem button>
 					<ListItemIcon>
 						<LightBulbIcon />

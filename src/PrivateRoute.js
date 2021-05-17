@@ -1,13 +1,7 @@
-import React, { useEffect } from 'react';
+import React, { useState } from 'react';
 import { Route, Redirect } from 'react-router-dom';
 
-const PrivateRoute = ({ children, setModalOpen, inputValue, password, ...rest }) => {
-	console.log('password ', password);
-	useEffect(() => {
-		setModalOpen(true);
-	
-	}, []);
-
+const PrivateRoute = ({ children, password, ...rest }) => {
 	return (
 		<Route
 			{...rest}

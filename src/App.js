@@ -36,9 +36,9 @@ export default withRouter(function App() {
 	const handleChange = (event) => {
 		setInputValue(event.target.value);
 	};
-	const handlePassword = () => {
-		setPassword(inputValue);
-		setModalOpen(false);
+	const handlePassword = (value) => {
+		setPassword(value);
+		// setModalOpen(false);
 	};
 
 	useEffect(() => {
@@ -49,9 +49,10 @@ export default withRouter(function App() {
 		getJokes().then((response) => response && setJokes(response.data.value));
 	}, []);
 
+	
 	return (
 		<Container maxWidth="sm">
-			<Header categories={categories} setCategory={setCategory} />
+			<Header categories={categories} setCategory={setCategory} setModalOpen={setModalOpen} handlePassword={handlePassword}/>
 			<Modal
 				setModalOpen={setModalOpen}
 				modalOpen={modalOpen}
@@ -64,7 +65,7 @@ export default withRouter(function App() {
 					<Route path="/nerdy">
 						<PageJoke jokes={filterJokesByCategories(jokes, category)} title={'Nerdy Jokes'} />
 					</Route>
-					<PrivateRoute path="/explicit" setModalOpen={setModalOpen} password={password}>
+					<PrivateRoute path="/explicit" password={password}>
 						<PageJoke jokes={filterJokesByCategories(jokes, category)} title={'Explicit Jokes'} />
 					</PrivateRoute>
 					<Route path="/others">
