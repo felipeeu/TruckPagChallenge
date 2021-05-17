@@ -6,11 +6,13 @@ import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import Input from './Input';
+import { useHistory } from 'react-router-dom';
 
-const Modal = ({ setModalOpen, modalOpen, inputValue, handleChange, handlePassword }) => {
+const Modal = ({ setModalOpen, modalOpen, inputValue, handlePassword }) => {
 	const handleClose = () => {
 		setModalOpen(false);
 	};
+	const history = useHistory();
 
 	return (
 		<div>
@@ -23,12 +25,18 @@ const Modal = ({ setModalOpen, modalOpen, inputValue, handleChange, handlePasswo
 				<DialogTitle id="alert-dialog-title">{'Explicit Jokes'}</DialogTitle>
 				<DialogContent>
 					<DialogContentText id="alert-dialog-description">
-						Insert the password to see explicit jokes.
+						Insert the password to see explicit jokes. (use any string for tests)
 					</DialogContentText>
 				</DialogContent>
-				<Input inputValue={inputValue} handleChange={handleChange} />
+				<Input inputValue={inputValue} handlePassword={handlePassword} />
 				<DialogActions>
-					<Button onClick={handlePassword} color="primary">
+					<Button
+						onClick={() => {
+							history.push('/explicit');
+							setModalOpen(false);
+						}}
+						color="primary"
+					>
 						Ok
 					</Button>
 					<Button onClick={handleClose} color="primary" autoFocus>
