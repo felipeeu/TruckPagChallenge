@@ -1,8 +1,5 @@
 import React, { useEffect, useState } from 'react';
 import Container from '@material-ui/core/Container';
-import Typography from '@material-ui/core/Typography';
-import Link from '@material-ui/core/Link';
-import ProTip from './ProTip';
 import Header from './components/common/Header';
 import Modal from './components/common/Modal';
 import { getJokesCategories, getJokes } from './api';
@@ -11,18 +8,7 @@ import PrivateRoute from './PrivateRoute';
 import PageJoke from './components/pages/PageJoke';
 import { filterJokesByCategories, noExplicitJokes, jokesWithoutCategory } from './functions';
 
-function Copyright() {
-	return (
-		<Typography variant="body2" color="textSecondary" align="center">
-			{'Copyright © '}
-			<Link color="inherit" href="https://material-ui.com/">
-				Your Website
-			</Link>{' '}
-			{new Date().getFullYear()}
-			{'.'}
-		</Typography>
-	);
-}
+
 
 export default withRouter(function App() {
 	const [ categories, setCategories ] = useState([]);
@@ -37,7 +23,6 @@ export default withRouter(function App() {
 	};
 	const handlePassword = (value) => {
 		setPassword(value);
-		// setModalOpen(false);
 	};
 
 	useEffect(() => {

@@ -11,8 +11,8 @@ const Layout = ({ jokes }) => {
 				{jokes &&
 					jokes.map((joke, idx) => {
 						return (
-							<Grid item>
-								<CardJoke key={idx} data={joke} cla />
+							<Grid key={idx} item>
+								<CardJoke  data={joke} cla />
 							</Grid>
 						);
 					})}
